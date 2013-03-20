@@ -1,0 +1,159 @@
+@import "fonts/fontawesome/stylesheet";
+
+@import "fonts/verb/verb_extralight/stylesheet.css";
+@import "fonts/verb/verb_light/stylesheet.css";
+@import "fonts/verb/verb_regular/stylesheet.css";
+@import "fonts/verb/verb_bold/stylesheet.css";
+@import "fonts/verb/verb_black/stylesheet.css";
+@import "fonts/verb/verb_blackitalic/stylesheet.css";
+
+$seneca-blue: #4E94C6;
+$gray-light: #ddd;
+
+.deck-container {
+	font-family: "Verb", "Helvetica Neue", sans-serif;
+	font-size:2em;
+	line-height: 1.4;
+	background:#fff;
+
+	.slide {
+		background:#fff;
+
+		h1 {
+			color: #333;
+			font-weight: 100;
+		}
+
+		h2 {
+			color: #333;
+			border-bottom-color:$gray-light;
+			font-weight: 700;
+		}
+
+		h3 {
+			color:#888;
+			font-weight: bold;
+		}
+
+		h2, h3, hgroup h2, hgroup h3 {
+			&.vcenter {
+				border-bottom: none;
+			}
+		}
+
+		footer {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			text-align: center;
+		}
+
+		pre {
+			border-color:$gray-light;
+		}
+
+		code {
+			color:#888;
+		}
+
+		blockquote {
+			font-size:2em;
+			font-style:italic;
+			padding:1em 2em;
+			color:#000;
+			border-left:5px solid $gray-light;
+
+			p {
+				margin:0;
+			}
+
+			cite {
+				font-size:.5em;
+				font-style:normal;
+				font-weight:bold;
+				color:#888;
+			}
+		}
+
+		::-moz-selection{ background:$seneca-blue; color:#fff; }
+		::selection { background:$seneca-blue; color:#fff; }
+
+		a {
+			&, &:hover, &:focus, &:active, &:visited {
+				color:$seneca-blue;
+				text-decoration:none;
+			}
+
+			&:hover, &:focus {
+				text-decoration:underline;
+			}
+		}
+
+		&.title {
+			background: url(img/bg-report-page.png) no-repeat -60px 50px;
+			background-size: contain;
+
+			h1 {
+				font-family: "HelveticaNeue","Helvetica Neue","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+				color: $seneca-blue;
+				display: inline-block;
+				font-size: 1.5em;
+
+				img {
+					margin: 0;
+					display: inline;
+					vertical-align: middle;
+				}
+
+				span {
+					color: $gray-light;
+				}
+			}
+		}
+	}
+
+	> .slide {
+		.deck-before, .deck-previous {
+			opacity:0.4;
+
+			&:not(.deck-child-current) {
+				.deck-before, .deck-previous {
+					opacity:1;
+				}
+			}
+		}
+
+		.deck-child-current {
+			opacity:1;
+		}
+	}
+
+	.deck-prev-link, .deck-next-link {
+		background:$gray-light;
+		font-family:serif; // sans-serif arrows x-browser fail
+
+		&, &:hover, &:focus, &:active, &:visited {
+			color:#fff;
+		}
+
+		&:hover, &:focus {
+			background:$seneca-blue;
+			text-decoration:none;
+		}
+	}
+
+	.deck-status {
+		font-size:0.6666em;
+	}
+
+	&.deck-menu {
+		.slide {
+			background:#eee;
+		}
+
+		.deck-current, .no-touch & .slide:hover {
+			background:#ddf;
+		}
+	}
+}

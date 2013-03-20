@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=1024, user-scalable=no">
+
+	<title>AngularJS London Meetup - March 2013</title>
+
+	<!-- Required stylesheet -->
+	<link rel="stylesheet" href="core/deck.core.css">
+
+	<!-- Extension CSS files go here. Remove or add as needed. -->
+	<link rel="stylesheet" href="extensions/goto/deck.goto.css">
+	<link rel="stylesheet" href="extensions/menu/deck.menu.css">
+	<link rel="stylesheet" href="extensions/navigation/deck.navigation.css">
+	<link rel="stylesheet" href="extensions/status/deck.status.css">
+	<link rel="stylesheet" href="extensions/hash/deck.hash.css">
+	<link rel="stylesheet" href="extensions/scale/deck.scale.css">
+	<link rel="stylesheet" href="extensions/codemirror/deck.codemirror.css">
+	<link rel="stylesheet" href="extensions/codemirror/themes/default.css">
+
+	<!-- Style theme. More available in /themes/style/ or create your own. -->
+	<link rel="stylesheet" href="themes/style/seneca/seneca.css">
+
+	<!-- Transition theme. More available in /themes/transition/ or create your own. -->
+	<link rel="stylesheet" href="themes/transition/horizontal-slide.css">
+
+	<style>
+
+	.about.slide h3 {
+		font-size: 1em;
+		font-weight: 300;
+		margin-bottom: 3rem;
+	}
+	.about.slide footer i:not(:first-child) {
+		margin-left: 3rem;
+	}
+
+	.speed.slide {
+		background: url(img/speed.jpg) no-repeat right bottom;
+		background-size: contain;
+	}
+	.speed.slide hgroup.vcenter {
+		right: 30%;
+	}
+	.speed.slide hgroup h1 {
+		font-weight: 900;
+		font-style: italic;
+	}
+	.speed.slide hgroup h2 {
+		font-size: 1.5em;
+		font-weight: 100;
+		border-bottom: none;
+	}
+
+	</style>
+
+	<!-- Required Modernizr file -->
+	<script src="modernizr.custom.js"></script>
+</head>
+<body class="deck-container">
+
+<!-- Begin slides. Just make elements with a class of slide. -->
+
+<section class="about slide">
+	<h2 class="vcenter">I <i class="icon-heart" style="color:red"></i> making web stuff</h2>
+	<footer>
+		<h3><i class="icon-twitter"></i> @adamburmister
+			<i class="icon-envelope-alt"></i> adam.burmister@gmail.com
+		</h3>
+	</footer>
+</section>
+
+<section class="title slide">
+	<h1>
+		<img src="themes/style/seneca/img/logo.png" alt="Logo">
+		Seneca <span>portfolio monitoring</span>
+	</h1>
+</section>
+
+<section class="slide">
+	<hgroup class="vcenter">
+		<h1>Proviso: YMMV</h1>
+	</hgroup>
+</section>
+
+<section class="speed slide">
+	<hgroup class="vcenter">
+		<h1>SPEED!</h1>
+		<h2>Speed has never killed anyone, suddenly becoming stationary&hellip;<br>that's what gets you.</h2>
+	</hgroup>
+</section>
+
+<section class="yeoman slide">
+	<img src="img/yeoman-logo.png" alt="Yeoman" height="200" style="margin-top: 50px">
+	<pre>
+$ npm install -g yo grunt-cli bower
+$ npm install generator-angular generator-testacular
+$ yo angular
+$ npm install && bower install # install default dependencies
+$ bower install angular-ui
+$ grunt test
+$ grunt server
+$ grunt</pre>
+</section>
+
+<section class="architecture slide">
+	<h2 style="text-align:center">A proposed architecture</h2>
+	<img src="img/arch.png" alt="">
+</section>
+
+<section class="slide">
+	<h2>What's missing out of the box?</h2>
+	<ul>
+		<li class="slide">
+			<p>Common helpers for web apps</p>
+			<ul>
+				<li>Page titles, text truncation, animation, security/auth, etc</li>
+			</ul>
+		</li>
+		<li class="slide">
+			<p>I'd like to see improvements to routing, state transition, ng-resource</p>
+		</li>
+		<li class="slide">
+			<p>Controller inheritence</p>
+		</li>
+		<li class="slide">
+			<p>I still can't suggest a best way to structure your apps</p>
+		</li>
+		<li class="slide">
+			<p><strong>Prediction</strong>: another layer of abstraction is still to come</p>
+		</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Quick architecture thoughts</h2>
+	<ul>
+		<li class="slide">
+			<p>I like <strong>constants</strong></p>
+		</li>
+		<li class="slide">
+			<p>I <strong><em>liked</em></strong> <strong>a single global (<code>$scope.currentUser</code>)</strong></p>
+		</li>
+		<li class="slide">
+			<p><strong>Filters are cool</strong>: good code resuse, easy to test</p>
+		</li>
+		<li class="slide">
+			<p><strong>Directives</strong> aren't as cool as I thought</p>
+		</li>
+		<li class="slide">
+			<p><strong>Splitting files</strong> makes it easier to manage in your head (esp. modals)</p>
+		</li>
+		<li class="slide">
+			<p><strong>Hate:</strong> mix of string interpolation syntaxes &mdash; "<code>resource/:id</code>" vs "<code>resource/{{id}}</code>"</p>
+		</li>
+		<li class="slide">
+			<p><strong>Debugging</strong> is still painful</p>
+		</li>
+	</ul>
+</section>
+
+<section class="gotchaTitle slide">
+	<h1>
+		<strong>lol, noob</strong>
+		<br>
+		<small style="font-size: 0.4em">(traps for young players)</small>
+	</h1>
+</section>
+
+<section class="gotchas slide">
+	<h2>ng-resource</h2>
+	<ul>
+		<li class="slide">
+			<h4>Trap: It doesn't work</h4>
+			<p>If you're new to ng-resource, here's 30 minutes of your life back&hellip;</p>
+			<ul class="slide">
+				<li>
+					<h4>Trick: You need to include the script. Idiot.</h4>
+					<code>angular.module('myapp', ['ngResource'])</code>
+				</li>
+			</ul>
+		</li>
+		<li class="slide">
+			<h4>Trap: HTTP methods</h4>
+			<p>It has instance methods for <code>get</code> <code>GET</code>, <code>save</code> <code>POST</code>, <code>query</code> <code>get</code>, and <code>delete</code> <code>DELETE</code></p>
+			<ul class="slide">
+				<li>
+					And a method called <code>remove</code>, which is just the same as <code>delete</code> <code>DELETE</code> <strong>?</strong>
+				</li>
+				<li>
+					But not updating <code>PUT</code>?
+				</li>
+			</ul>
+		</li>
+		<li class="slide">
+<textarea id="code" name="code" class="code" mode="javascript">
+.factory('MyResource', ['$resource',
+  function ($resource) {
+
+    var MyResource = $resource("resource/:id", {
+      id: '@id'
+    }, {
+      update: { method:'PUT' }
+    });
+
+    return MyResource;
+  }]
+)
+</textarea>
+		</li>
+	</ul>
+</section>
+
+<section class="gotchas slide">
+	<h2>ng-resource</h2>
+	<h3>URL building</h3>
+	<ul>
+		<li class="slide">
+			<p>It's a bum full of smarties.</p>
+		</li>
+		<li class="slide">
+			<h4>Trap: Passing a port number in a URL</h4>
+			<p><code>$resource("http://server:8080/")</code></p>
+		</li>
+		<li class="slide">
+			<h4>Trick</h4>
+			<ul>
+				<li class="slide">
+					<p>Double escape with <code>\\</code>
+						<br>
+						<code>$resource("http://server\\:port/")</code></p>
+				</li>
+				<li class="slide">
+					<p>Pass as a param:
+						<br>
+						<code>$resource("http://server:port/", { port: ":8080" })</code></p>
+				</li>
+			</ul>
+		</li>
+		<li class="slide">
+			<p><strong>Suggestions</strong> &mdash; build yourself a Helper library, include URL builders</p>
+		</li>
+	</ul>
+</section>
+
+<section class="gotchas slide">
+	<h2>ng-resource</h2>
+	<h3>REST</h3>
+	<ul>
+		<li class="slide">
+			<code>GET /resource/</code><code class="slide">[:id(.json) | (index(.json) | null)]</code>
+			<ul class="slide" style="list-style-type:none">
+				<li><code>[{ id:1, name:"Fuzzy" }, { id:2, name:"Wuzzy" }]</code></li>
+			</ul>
+		</li>
+		<li class="slide">
+<textarea id="code" name="code" class="code" mode="javascript">
+.factory('MyResource', ['$resource',
+  function ($resource) {
+
+    var MyResource = $resource("resource/:id", {
+      id: '@id'
+    }, {
+      update: { method:'PUT' }
+    });
+
+    return MyResource;
+  }]
+)
+
+$scope.resources = MyResource.get({ id: null }, success, error);
+</textarea>
+		</li>
+		<li class="slide">
+<textarea id="code" name="code" class="code" mode="javascript">$scope.resources = MyResource.query({ id: null }, success, error);</textarea>
+		</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>ng-resource</h2>
+	<h3>One last thought</h3>
+
+	<ul>
+		<li class="slide">
+			<p>Is this really the best approach?</p>
+			<p>Doesn't this just take away the advantages of AngularJS working with plain JSON objects?</p>
+		</li>
+		<li class="slide">
+			<p>Complex, nested JSON objects become a marshalling nightmare.</p>
+		</li>
+		<li class="slide">
+			<p><strong>What's a solution?</strong> DAL-service approach, intercepting HTTP event responses before they're returned?</p>
+		</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>ng-include</h2>
+	<ul>
+		<li class="slide">
+			<p>I really like these, especially with <code>ng-switch</code>
+				<br>
+				They're on-demand partials (reduce initial HTML page weight)
+			</p>
+		</li>
+		<li class="slide">
+			<p><strong>UX</strong> &mdash; You'll need to add spinners while it's loading</p>
+		</li>
+		<li class="slide">
+			<h4>Trap</h4>
+			<p>There are scope issues. <code>ng-include</code> generates a new child scope, which prototypically inherits from the parent scope, so setting <code>field</code> won't work.</p>
+			<h4>Trick</h4>
+			<p>Access the parent scope with <code>$parent.field</code></p>
+		</li>
+	</ul>
+</section>
+
+<sections class="slide">
+	<h2>Navigation</h2>
+	<ul>
+		<li class="slide">
+			<p>I started with...</p>
+<textarea id="code" name="code" class="code" mode="javascript">
+$scope.go = function(path){ $location.path(path) }
+<a ng-click="go('/home')">Click me!</a></textarea>
+		</li>
+		<li class="slide">
+			<p>But, I realised that sucks for usability</p>
+			<textarea id="code" name="code" class="code" mode="javascript"><a ng-href="{{UrlHelpers.home(org)}}">{{org.name | truncate:30}}</a></textarea>
+		</li>
+		<li class="slide">
+			<p>There's not easy way to do transitions between views.</p>
+			<ul style="list-style:none">
+				<li class="slide">I currently use CSS3 anims to transition in (but out cannot be done easily)</li>
+				<li class="slide">
+					<blockquote style="font-size: 1.5em; padding-top:0; padding-bottom:0;">
+						animation hooks will be at core level &hellip; easily animate your ngView directive to have transition effects between views, make repeated elements fade in and fade out upon insert &amp; remove
+						<cite>YearOfMoo</cite>
+					</blockquote>
+					<p>
+						<a href="https://github.com/angular-ui/ui-router">https://github.com/angular-ui/ui-router</a>,
+						<a href="https://github.com/angular-ui/ui-router/issues/22">https://github.com/angular-ui/ui-router/issues/22</a>
+					</p>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</sections>
+
+<section class="slide">
+	<h1 style="font-weight:300; font-size: 2em">I'll now welcome your <span style="font-weight:100">(easy)</span> questions</h1>
+</section>
+
+<!-- End slides. -->
+
+
+<!-- Begin extension snippets. Add or remove as needed. -->
+
+<!-- deck.navigation snippet -->
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<!-- deck.status snippet -->
+<p class="deck-status">
+	<span class="deck-status-current"></span>
+	/
+	<span class="deck-status-total"></span>
+</p>
+
+<!-- deck.goto snippet -->
+<form action="." method="get" class="goto-form">
+	<label for="goto-slide">Go to slide:</label>
+	<input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+	<datalist id="goto-datalist"></datalist>
+	<input type="submit" value="Go">
+</form>
+
+<!-- deck.hash snippet -->
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+<!-- End extension snippets. -->
+
+
+<!-- Required JS files. -->
+<script src="jquery-1.7.2.min.js"></script>
+<script src="core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="core/deck.core.js"></script>
+<script src="extensions/hash/deck.hash.js"></script>
+<script src="extensions/menu/deck.menu.js"></script>
+<script src="extensions/goto/deck.goto.js"></script>
+<script src="extensions/status/deck.status.js"></script>
+<script src="extensions/navigation/deck.navigation.js"></script>
+<script src="extensions/scale/deck.scale.js"></script>
+
+<!-- Codemirror -->
+<script src="extensions/codemirror/codemirror.js"></script>
+
+<!-- include the code syntax you want to highlight -->
+<!-- javascript -->
+<script src="extensions/codemirror/mode/javascript/javascript.js"></script>
+
+<!-- html mode : note code miror requires xml, css and javasript modes for html rendering -->
+<script src="extensions/codemirror/mode/xml/xml.js"></script>
+<script src="extensions/codemirror/mode/css/css.js"></script>
+<script src="extensions/codemirror/htmlmixed/htmlmixed.js"></script>
+
+<script src="extensions/codemirror/deck.codemirror.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+	$(function() {
+		$.deck('.slide');
+	});
+</script>
+</body>
+</html>
